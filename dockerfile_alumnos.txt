@@ -1,0 +1,7 @@
+FROM php:8.2-apache
+
+# Instala la extensión mysqli para conectarse a MySQL
+RUN docker-php-ext-install mysqli
+
+# Copia el archivo index.php al directorio raíz del servidor
+COPY alumnos.php /var/www/html/index.php

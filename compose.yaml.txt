@@ -1,0 +1,32 @@
+services:
+  maestros:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./maestros.php:/var/www/html/index.php
+    environment:
+      MYSQL_IP_DB: db
+      MYSQL_APP_USER: root
+      MYSQL_APP_PASSWORD: Emmanuel2000
+  alumnos:
+    build:
+      context: .
+      dockerfile: dockerfile_alumnos
+    ports:
+      - "8081:80"
+    volumes:
+      - ./alumnos.php:/var/www/html/index.php
+    environment:
+      DB_HOST: db
+      DB_NAME: alumnos
+      DB_USER: root
+      DB_PASSWORD: Emmanuel2000
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: Emmanuel2000
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8090:80"
